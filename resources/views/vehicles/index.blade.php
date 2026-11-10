@@ -11,17 +11,12 @@
 <body>
 
 {{-- ALERTAS PARA MOSTRAR MENSAJES DE EXITO O ERROR --}}
-    @if (session('success'))
+    @if (session('status'))
         <div class="alert alert-success">
-            {{ session('success') }}
+            {{ session('status') }}
         </div>
     @endif
 
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
 
 
 {{-- BOTON PARA AñADIR VEHICULOS --}}
@@ -31,6 +26,7 @@
                                     Add Vehicle
                                 </button>
 
+
                                 <dialog class="dialog dialog-scrollable" id="addvDialog">
                                     <div class="dialog-header">
                                         <h1 class="dialog-title">Add Vehicle</h1>
@@ -39,7 +35,7 @@
                                     </div>
                                     <div class="dialog-body">
 
-                                        <form action="{{ route('vehicles.store') }}" method="POST"
+                            <form action="{{ route('vehicles.store') }}" method="POST" id="addvDialog"
                                             style="display: inline;">
                                             @csrf
                                             {{-- LOS INPUTS EN DIALOGO de ADD VEHICLE --}}
@@ -96,10 +92,12 @@
                                         <button type="button" class="btn-solid theme-secondary"
                                             data-bs-dismiss="dialog">Close</button>
                                         <button type="submit" class="btn-solid theme-primary">Save changes</button>
+                      {{-- AQUI MI PROBLEMA, PQ NO SE GUARDA YO SE QUE LE HACE FALTA ALGO MAS AL BTN PERO NO ME ACUERDO --}}
                                     </div>
                                     </form>
                                 </dialog>
                             </div>
+
 
 {{-- TABLA CON BOTON PARA ACTUALIZAR Y ELIMINAR VEHICULOS --}}
     <table class="table">
@@ -133,11 +131,11 @@
                         <div class="btn-group btn-group-divider" role="group" aria-label="Basic example">
                             <div>
                                 <button type="button" class="btn-solid theme-primary" data-bs-toggle="dialog"
-                                    data-bs-target="#scrollableBodyDialog">
+                                    data-bs-target="#updatevehicle">
                                     Update
                                 </button>
 
-                                <dialog class="dialog dialog-scrollable" id="scrollableBodyDialog">
+                                <dialog class="dialog dialog-scrollable" id="updatevehicle">
                                     <div class="dialog-header">
                                         <h1 class="dialog-title">Update Vehicle</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="dialog"
@@ -145,7 +143,7 @@
                                     </div>
                                     <div class="dialog-body">
 
-                                        <form action="{{ route('vehicles.update', $vehicle->id) }}" method="POST"
+                                        <form action="{{ route('vehicles.update', $vehicle->id) }}" method="POST" id='updatevehicle'
                                             style="display: inline;">
                                             @csrf
                                             @method('PUT')
@@ -203,6 +201,7 @@
                                         <button type="button" class="btn-solid theme-secondary"
                                             data-bs-dismiss="dialog">Close</button>
                                         <button type="submit" class="btn-solid theme-primary">Save changes</button>
+                                                          {{-- AQUI MI PROBLEMA, PQ NO SE GUARDA YO SE QUE LE HACE FALTA ALGO MAS AL BTN PERO NO ME ACUERDO --}}
                                     </div>
                                     
                                     </form>
